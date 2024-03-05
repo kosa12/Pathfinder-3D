@@ -128,8 +128,8 @@ def reconstructPath(optpath, start_p, finish_p):
 
 
 def main():
-    points = readPoints("surface_100x100_test2.txt")
-    start, finish = readEndPoints("surface_100x100.end_points.txt")
+    points = readPoints("tests/surface_100x100_test2.txt")
+    start, finish = readEndPoints("tests/surface_100x100.end_points.txt")
     optpath, optcost = aStarSearch(points, start, finish)
     create_3d_plot(optpath, points)
     
