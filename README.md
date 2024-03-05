@@ -17,6 +17,15 @@ The solution employs the A* search algorithm, a popular pathfinding algorithm kn
 - matplotlib==3.4.3
 - numpy==1.21.2
 
+# Getting Started
+
+To run the pathfinding algorithm and visualize the results:
+
+1. Clone this repository to your local machine.
+2. Ensure you have Python installed.
+3. Install the required dependencies by running `pip install -r requirements.txt`.
+4. Run the `pathfinder.py` script using Python.
+
 
 # Screenshots
 
