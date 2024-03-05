@@ -31,3 +31,7 @@ To run the pathfinding algorithm and visualize the results:
 
 ![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100png)
 ![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100_2png)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
