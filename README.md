@@ -11,7 +11,14 @@ The problem involves navigating from a start point to a goal point on a 3D terra
 # Solution Overview
 
 The solution employs the A* search algorithm, a popular pathfinding algorithm known for its efficiency and accuracy in finding the shortest path in a graph. A heuristic function is used to guide the search towards the goal while considering the terrain's topology and the presence of obstacles.
-## Screenshots
+
+# The following dependencies are required to run the code:
+
+- matplotlib==3.4.3
+- numpy==1.21.2
+
+
+# Screenshots
 
 ![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100png)
 ![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100_2png)
