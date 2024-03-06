@@ -5,7 +5,7 @@ import matplotlib.cm as cm
 
 from queue import PriorityQueue
 
-mode = "minimalis lepesszam"
+mode = "minimalis tavolsag"
 
 def create_3d_plot(optpath, points):
     x_points, y_points, z_points, b_points = np.array(points).T
@@ -119,14 +119,20 @@ def reconstruct_path(optpath, start_p, finish_p):
         current = optpath[current]
     return path[::-1]
 
+def write_path_to_file(optpath, filename):
+    with open(filename, 'w') as file:
+        for point in optpath:
+            file.write(f"{point[0]} {point[1]} {point[2]}\n")
+
 
 def main():
-    points = read_points("tests/surface_100x100_test1.txt")
-    start, finish = read_end_points("tests/surface_100x100.end_points.txt")
+    points = read_points("tests/surface_256x256.txt")
+    start, finish = read_end_points("tests/surface_256x256.end_points.txt")
     optpath, optcost = a_star_search(points, start, finish)
     if optpath is not None:
         create_3d_plot(optpath, points)
         print(optcost)
+        write_path_to_file(optpath, "path.txt")
     else:
         print("No path found.")
 
