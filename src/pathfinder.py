@@ -132,7 +132,7 @@ def main():
     if optpath is not None:
         create_3d_plot(optpath, points)
         print(optcost)
-        write_path_to_file(optpath, "path.txt")
+        write_path_to_file(optpath, "src/path.txt")
     else:
         print("No path found.")
 
