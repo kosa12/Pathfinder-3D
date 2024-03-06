@@ -7,28 +7,42 @@ from queue import PriorityQueue
 
 mode = "minimalis tavolsag"
 
-def create_3d_plot(optpath, points):
-    x_points, y_points, z_points, b_points = np.array(points).T
+def create_plot(optpath, points):
+    x_points, y_points, z_points, _ = np.array(points).T
     x_path, y_path, z_path, _ = np.array(optpath).T
     obstacle_points = np.array([point[:3] for point in points if point[3] == 1])
 
-    fig = plt.figure()
-    ax = fig.add_subplot(1, 1, 1, projection='3d')
-
     intensity = z_points / np.max(z_points)
 
-    ax.scatter(x_points, y_points, z_points, c=intensity, cmap='hot', marker=',', alpha=0.1)
-    ax.scatter(obstacle_points[:, 0], obstacle_points[:, 1], obstacle_points[:, 2], c='black', marker='.', alpha=1)
-    ax.plot(x_path, y_path, z_path, c='b', linewidth=2, marker='o')
+    fig = plt.figure(figsize=(12, 6))
+    gs = fig.add_gridspec(2, 3, width_ratios=[1, 1, 0.1])
 
-    cbar = fig.colorbar(cm.ScalarMappable(cmap='hot'), ax=ax)
+    # Create 3D plot
+    ax1 = fig.add_subplot(gs[:, 0], projection='3d')
+    ax1.scatter(x_points, y_points, z_points, c=intensity, cmap='hot', marker=',', alpha=0.1)
+    ax1.scatter(obstacle_points[:, 0], obstacle_points[:, 1], obstacle_points[:, 2], c='black', marker='.', alpha=1)
+    ax1.plot(x_path, y_path, z_path, c='b', linewidth=2, marker='o')
+    ax1.set_xlabel('X')
+    ax1.set_ylabel('Y')
+    ax1.set_zlabel('Z')
 
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
+    # Create 2D plot
+    ax2 = fig.add_subplot(gs[:, 1])
+    ax2.scatter(x_points, y_points, c=intensity, cmap='hot', marker=',', alpha=0.1)
+    ax2.scatter(obstacle_points[:, 0], obstacle_points[:, 1], c='black', marker='.', alpha=1)
+    ax2.plot(x_path, y_path, c='b', linewidth=0.2, marker='.')
+    ax2.set_xlabel('X')
+    ax2.set_ylabel('Y')
 
+    # Create colorbar
+    ax3 = fig.add_subplot(gs[:, 2])
+    im = ax3.imshow([[0, 1]], cmap='hot')
+    fig.colorbar(im, cax=ax3)
+    ax3.set_aspect(20)
+    ax3.set_axis_off()
+
+    plt.tight_layout()
     plt.show()
-
 
 def read_points(filename):
     points = []
@@ -126,11 +140,12 @@ def write_path_to_file(optpath, filename):
 
 
 def main():
-    points = read_points("tests/surface_256x256.txt")
-    start, finish = read_end_points("tests/surface_256x256.end_points.txt")
+    points = read_points("tests/surface_100x100.txt")
+    start, finish = read_end_points("tests/surface_100x100.end_points.txt")
     optpath, optcost = a_star_search(points, start, finish)
     if optpath is not None:
-        create_3d_plot(optpath, points)
+        create_plot(optpath, points)
+
         print(optcost)
         write_path_to_file(optpath, "src/path.txt")
     else:
