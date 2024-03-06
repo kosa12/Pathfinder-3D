@@ -28,9 +28,7 @@ To run the pathfinding algorithm and visualize the results:
 
 
 # Screenshots
-
-![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100png)
-![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/100x100_2png)
+![App Screenshot](https://github.com/kosa12/Pathfinder-3D/blob/main/screenshots/100x100_2png)
 
 ## License
 
