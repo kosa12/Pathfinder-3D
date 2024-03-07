@@ -73,7 +73,7 @@ def get_end_points(start, finish, points):
 
 
 def distance3D(point1, point2):
-    return np.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2 + (point1[3] - point2[3]) ** 2)
+    return np.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2 + (point1[2] - point2[2]) ** 2)
 
 
 def distance2D(point1, point2):
@@ -116,7 +116,7 @@ def a_star_search(points, start, finish):
         for neighbor in get_neighbors(current_point, points_set):
             newcost = cost[current_point] + heuristic(mode, current_point, neighbor)
 
-            if neighbor not in cost or newcost < cost.get(neighbor, float('inf')) and neighbor[3] == 0:
+            if (neighbor not in cost or newcost < cost.get(neighbor, float('inf'))) and neighbor[3] == 0:
                 cost[neighbor] = newcost
                 priority = newcost + heuristic(mode, neighbor, finish_p)
                 pq.put((priority, neighbor))
@@ -145,7 +145,6 @@ def main():
     optpath, optcost = a_star_search(points, start, finish)
     if optpath is not None:
         create_plot(optpath, points)
-
         print(optcost)
         write_path_to_file(optpath, "src/path.txt")
     else:
