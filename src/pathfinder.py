@@ -10,7 +10,7 @@ def create_plot(optpath, points):
     x_path, y_path, z_path, _ = np.array(optpath).T
     obstacle_points = np.array([point[:3] for point in points if point[3] == 1])
 
-    intensity = z_points / np.max(z_points)
+    intensity = z_points / (np.max(z_points)*2) 
 
     fig = plt.figure(figsize=(12, 6))
     gs = fig.add_gridspec(2, 3, width_ratios=[1, 1, 0.1])
